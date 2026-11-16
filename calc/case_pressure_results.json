@@ -1,0 +1,67 @@
+{
+  "NOTE": "EXAMPLE geometry. Not the team's design. Replace the [E] values.",
+  "inputs": {
+    "Do": 82.0,
+    "Di": 70.0,
+    "groove_depth": 3.0,
+    "sigma_y": 240.0,
+    "sigma_u": 290.0,
+    "D_seal": 70.0,
+    "n_bolt": 6,
+    "As_bolt": 20.1,
+    "sigma_u_bolt": 1200.0,
+    "Pc_design": 2.5,
+    "ratio_proof": 1.5
+  },
+  "wall_thickness_mm": 6.0,
+  "wall_at_groove_mm": 3.0,
+  "closure_area_mm2": 3848.4510006474966,
+  "closure_force_kN_at_Pc": 9.62112750161874,
+  "failure_pressures_MPa": {
+    "wall: first yield (Lame)": 37.660013764624914,
+    "wall: burst est. (Barlow, UTS)": 42.4390243902439,
+    "wall at O-ring groove: first yield (Lame)": 18.2016,
+    "wall at O-ring groove: burst est. (Barlow)": 21.21951219512195,
+    "closure bolts: tensile break (no thread-strip check)": 37.604740186545456
+  },
+  "weakest_mode": "wall at O-ring groove: first yield (Lame)",
+  "test_pressure_MPa": 3.75,
+  "margin_weakest_over_proof": 4.853759999999999,
+  "ladder_MPa": [
+    1.88,
+    2.81,
+    3.75
+  ],
+  "Pc_vs_throat(mdot,c* each +-15%; steady state, no ignition spike, no erosion)": [
+    {
+      "throat_mm": 9.0,
+      "Pc_MPa_low": 2.76,
+      "Pc_MPa_nominal": 3.83,
+      "Pc_MPa_high": 5.06
+    },
+    {
+      "throat_mm": 10.0,
+      "Pc_MPa_low": 2.24,
+      "Pc_MPa_nominal": 3.1,
+      "Pc_MPa_high": 4.1
+    },
+    {
+      "throat_mm": 11.13,
+      "Pc_MPa_low": 1.81,
+      "Pc_MPa_nominal": 2.5,
+      "Pc_MPa_high": 3.31
+    },
+    {
+      "throat_mm": 12.0,
+      "Pc_MPa_low": 1.55,
+      "Pc_MPa_nominal": 2.15,
+      "Pc_MPa_high": 2.85
+    },
+    {
+      "throat_mm": 13.0,
+      "Pc_MPa_low": 1.32,
+      "Pc_MPa_nominal": 1.83,
+      "Pc_MPa_high": 2.42
+    }
+  ]
+}
