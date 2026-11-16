@@ -91,7 +91,7 @@ sz = dict(
     note="CF is IDEAL (assumed gamma, optimum expansion at sea level); real CF is lower, so real throat is somewhat larger.",
     CF_ideal=CF_opt, eps_opt=eps_opt, At_mm2=At * 1e6, d_throat_mm=1e3 * math.sqrt(4 * At / math.pi),
     d_exit_mm=1e3 * math.sqrt(4 * At * eps_opt / math.pi),
-    cstar_implied_m_s=cstar,
+    cstar_implied_m_s=cstar, cstar_note="depends on assumed gamma via CF (circular, not independent)",
     Isp_from_CF_cstar_s=Isp_chk,
     Isp_paper_s=P["Isp"],
     note2="Isp_from_CF_cstar equals paper Isp by construction (At was sized from F, Pc, mdot): it is NOT an independent validation.",
@@ -103,7 +103,6 @@ sz["tank_volume_L_liquid"] = m_ox_load / A["rho_N2O_liq"] * 1e3
 sz["tank_volume_L_with_ullage"] = sz["tank_volume_L_liquid"] * A["tank_margin"]
 # fuel grain volume in chamber (for reference): annulus not specified in the paper -> only chamber bore volume
 sz["chamber_bore_volume_L (82 outer, 50 inner, 339 long, [P])"] = math.pi * 0.050**2 / 4 * 0.339 * 1e3
-sz["fuel_bulk_density_if_fills_bore_kg_m3 (reference only)"] = P["m_fuel"] / (math.pi * 0.050**2 / 4 * 0.339)
 sz["T/W of candy motor alone not meaningful; see flight T/W below"] = None
 R["step4_sizing"] = sz
 
@@ -177,6 +176,18 @@ for mp in np.arange(0.2, 1.5, 0.005):
     if drag_free_apogee_for_prop(P["B_dry"], mp) >= P["B_alt_calc"]:
         need = float(mp); break
 fl["teamB_propellant_needed_for_1187m_drag_free_kg_(Isp168.2, same burn time)"] = need
+# inverse: impulse needed to reach the paper's apogees drag-free with 10 kg DRY (face value of Table 5)
+inv = {}
+for tgt in (313.0, 319.0):
+    for mp in np.arange(0.3, 1.5, 0.001):
+        F_ = P["Isp"] * G0 * mp / P["t_burn"]
+        if fly(P["rocket_dry"], mp, P["rocket_D"], 0, F=F_, drag=False)["apogee_m"] >= tgt:
+            inv[f"target_{int(tgt)}m"] = dict(m_prop_kg=float(mp), It_Ns=float(P["Isp"] * G0 * mp)); break
+fl["inverse_dragfree_10kg_dry"] = inv
+# stoichiometric O/F for sucrose + N2O -> CO2 + H2O + N2  (C12H22O11 + 24 N2O -> 12 CO2 + 11 H2O + 24 N2)
+M_suc = 12*12.011 + 22*1.008 + 11*15.999; M_n2o = 2*14.007 + 15.999
+chk["stoichiometric O/F (sucrose+N2O)"] = 24 * M_n2o / M_suc
+chk["implied O/F / stoich"] = chk["O/F implied"] / chk["stoichiometric O/F (sucrose+N2O)"]
 R["step5_flight"] = fl
 
 # ---------------- plots ----------------

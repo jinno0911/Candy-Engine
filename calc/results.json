@@ -52,7 +52,9 @@
     "G_ox over port D=50mm (Table1) [kg/m2 s]": 96.17967149515346,
     "G_ox over chamber D=65mm (Fig.1b read-off) [kg/m2 s]": 56.91104822198429,
     "port D that would give G=70 [mm]": 58.60877295835541,
-    "port D that would give G=300 [mm]": 28.3107269857136
+    "port D that would give G=300 [mm]": 28.3107269857136,
+    "stoichiometric O/F (sucrose+N2O)": 3.0859516735466563,
+    "implied O/F / stoich": 2.5052171500377582
   },
   "step4_sizing": {
     "note": "CF is IDEAL (assumed gamma, optimum expansion at sea level); real CF is lower, so real throat is somewhat larger.",
@@ -62,6 +64,7 @@
     "d_throat_mm": 11.133845932216538,
     "d_exit_mm": 36.78280157501119,
     "cstar_implied_m_s": 1141.2444422713652,
+    "cstar_note": "depends on assumed gamma via CF (circular, not independent)",
     "Isp_from_CF_cstar_s": 168.2029198220679,
     "Isp_paper_s": 168.2,
     "note2": "Isp_from_CF_cstar equals paper Isp by construction (At was sized from F, Pc, mdot): it is NOT an independent validation.",
@@ -69,7 +72,6 @@
     "tank_volume_L_liquid": 0.7553933734846344,
     "tank_volume_L_with_ullage": 0.9064720481815612,
     "chamber_bore_volume_L (82 outer, 50 inner, 339 long, [P])": 0.6656249434793375,
-    "fuel_bulk_density_if_fills_bore_kg_m3 (reference only)": 96.15024290625416,
     "T/W of candy motor alone not meaningful; see flight T/W below": null
   },
   "step5_flight": {
@@ -141,6 +143,16 @@
       "t_apogee_Cd0.7_s": 10.699999999999509,
       "Cd_needed_to_match_paper_calc": "UNREACHABLE: even drag-free apogee is below the paper's number"
     },
-    "teamB_propellant_needed_for_1187m_drag_free_kg_(Isp168.2, same burn time)": 0.46000000000000024
+    "teamB_propellant_needed_for_1187m_drag_free_kg_(Isp168.2, same burn time)": 0.46000000000000024,
+    "inverse_dragfree_10kg_dry": {
+      "target_313m": {
+        "m_prop_kg": 0.5760000000000003,
+        "It_Ns": 950.0996332800004
+      },
+      "target_319m": {
+        "m_prop_kg": 0.5810000000000002,
+        "It_Ns": 958.3470259300002
+      }
+    }
   }
 }
